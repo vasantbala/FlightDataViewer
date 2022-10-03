@@ -19,11 +19,13 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         shell: pwsh
+        env:
+          ghAPIToken: ${{ secrets.GH_API_TOKEN }}
         run: |
           $githubBaseUrl = 'https://api.github.com'
           $repoName = 'FlightDataViewer'
           $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"          
-          $bearerToken = 'Bearer ' + {{ secrets.GH_API_TOKEN }}
+          $bearerToken = 'Bearer ' + $env:ghAPIToken
           Write-Host $bearerToken
           $headers.Add("Authorization", $bearerToken)
           $url = $githubBaseUrl + '/repos/vasantbala/' + $repoName + '/pulls'
