@@ -22,6 +22,14 @@ jobs:
         env:
           ghAPIToken: ${{ secrets.GH_API_TOKEN }}
         run: |
+          Class PRResult
+          {
+          [String] $title
+          [String] $owner
+          [int] $daysWithoutResponse
+          [String[]] $reviewers
+          [String] $action
+          }
           $githubBaseUrl = 'https://api.github.com'
           $repoName = 'FlightDataViewer'
           $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"          
