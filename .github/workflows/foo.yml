@@ -22,8 +22,9 @@ jobs:
         run: |
           $githubBaseUrl = 'https://api.github.com'
           $repoName = 'FlightDataViewer'
-          $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+          $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"          
           $bearerToken = 'Bearer ' + {{ secrets.GH_API_TOKEN }}
+          Write-Host $bearerToken
           $headers.Add("Authorization", $bearerToken)
           $url = $githubBaseUrl + '/repos/vasantbala/' + $repoName + '/pulls'
           $results = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ContentType "application/json"
