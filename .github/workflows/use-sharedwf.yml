@@ -32,19 +32,18 @@ jobs:
 
 finally:
   runs-on: [ubuntu-latest]
-  steps:
-    - name: Slack notify
-      - uses: 8398a7/action-slack@v3
-      with:
-        status: custom
-        fields: workflow,job,commit,repo,ref,author,took
-        custom_payload: |
-          {
-            attachments: [{
-            color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-            text: 'Hello',
-            }]
-          }
+  steps:    
+    - uses: 8398a7/action-slack@v3
+    with:
+      status: custom
+      fields: workflow,job,commit,repo,ref,author,took
+      custom_payload: |
+        {
+          attachments: [{
+          color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+          text: 'Hello',
+          }]
+        }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       if: always() # Pick up events even if the job fails or is canceled.
