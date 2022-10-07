@@ -40,3 +40,18 @@ jobs:
           ghRepoName: ${{ inputs.gh-repo-name }}
         run: |
           ./staleprs.ps1 -githubBaseUrl $env:ghUrl -apiToken $env:ghAPIToken -repoName $env:ghRepoName
+    steps:
+      - uses: 8398a7/action-slack@v3
+      with:
+        status: custom
+        fields: workflow,job,commit,repo,ref,author,took
+        custom_payload: |
+          {
+            attachments: [{
+            color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+            text: 'Hello',
+            }]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always() # Pick up events even if the job fails or is canceled.
