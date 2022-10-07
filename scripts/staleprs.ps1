@@ -45,8 +45,4 @@ Class PRResult
         }
         $list.Add($prResult)
         }
-        $list | Format-Table -AutoSize
-        
-        $payload = "{'body':'test body'}"       
-        $testresults = Invoke-RestMethod -Method Post -Uri https://httpbin.org/anything -ContentType "application/json" -Body $payload
-        $testresults.data
+    $list

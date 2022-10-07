@@ -16,6 +16,8 @@ on:
     secrets:
       gh-pat:
         required: true
+      slack-webhook:
+        required: true
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,20 +31,21 @@ jobs:
       gh-repo-name: FlightDataViewer
     secrets:
       gh-pat: ${{ secrets.GH_API_TOKEN }}
+      slack-webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  finally:
-    runs-on: [ubuntu-latest]
-    steps:
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: custom          
-          custom_payload: |
-            {
-              attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: 'hello',
-              }]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+  #finally:
+    #runs-on: [ubuntu-latest]
+    #steps:
+      #- uses: 8398a7/action-slack@v3
+        #with:
+          #status: custom          
+          #custom_payload: |
+            #{
+              #attachments: [{
+                #color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                #text: 'hello',
+              #}]
+            #}
+        #env:
+          #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        #if: always() # Pick up events even if the job fails or is canceled.
