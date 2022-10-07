@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: use-workflow-example
+name: shared-workflow-example
 
 # Controls when the workflow will run
 on:
@@ -23,7 +23,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   call-workflow-passing-data:
-    uses: ./sharedwf.yml@main
+    uses: vasantbala/flightdataviewer/.github/workflows/sharedwf.yml@master
     with:
       gh-url: https://api.github.com
       gh-repo-name: FlightDataViewer
