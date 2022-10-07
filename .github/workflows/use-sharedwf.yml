@@ -23,7 +23,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   call-workflow-passing-data:
-    uses: vasantbala/flightdataviewer/.github/workflows/sharedwf.yml@main
+    uses: ./sharedwf.yml@main
     with:
       gh-url: https://api.github.com
       gh-repo-name: FlightDataViewer
