@@ -4,7 +4,7 @@ param (
     [Parameter(Mandatory)]
     [String]$apiToken,
     [Parameter(Mandatory)]
-    [String]$repoName,
+    [String]$repoName
     )
 
 Class PRResult
