@@ -49,7 +49,7 @@ jobs:
           $bearerToken = 'Bearer ' + $env:ghAPIToken
           Write-Host $bearerToken
           $headers.Add("Authorization", $bearerToken)
-          $url = $env.ghUrl + '/repos/vasantbala/' + $env.ghRepoName + '/pulls'
+          $url = $env:ghUrl + '/repos/vasantbala/' + $env:ghRepoName + '/pulls'
           $results = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ContentType "application/json"
           $now = [DateTime]::UtcNow
           Write-Host $prDate.DateTime
