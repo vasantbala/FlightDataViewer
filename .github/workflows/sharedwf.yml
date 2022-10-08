@@ -43,5 +43,4 @@ jobs:
           slackWebhook: ${{ secrets.slack-webhook }}
         run: |
           $prList = ./staleprs.ps1 -githubBaseUrl $env:ghUrl -apiToken $env:ghAPIToken -repoName $env:ghRepoName
-          $slackBody = "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"OpenPRson*Acme*repository\"}},{\"type\":\"divider\"},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*<https://google.com|ACME-10001>*\\n\"}},{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Author*:@vasant.bala\"},{\"type\":\"mrkdwn\",\"text\":\"*Reviewers:*@vasant.bala,@vasant.bala@gmail.com\"},{\"type\":\"mrkdwn\",\"text\":\"*Noactionsince*:3days\"}]},{\"type\":\"divider\"},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*<https://google.com|ACME-10002>*\"}},{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Author*:UserA\"},{\"type\":\"mrkdwn\",\"text\":\"*Reviewers:*UserB,UserC\"},{\"type\":\"mrkdwn\",\"text\":\"*Noactionsince*:3days\"}]},{\"type\":\"divider\"}]}"
-          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -slackBlockKitText $slackBody
+          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -slackBlockKitText $slackBody -repositoryName $env:ghRepoName -prList $prList
