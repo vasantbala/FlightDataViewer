@@ -88,4 +88,4 @@ $slackContent.blocks = $list.ToArray()
 
 $slackPayload = $slackContent | ConvertTo-Json -Compress -Depth 10
 
-$results = Invoke-RestMethod -Method Post -Uri $slackWebHook -Body @slackPayload -ContentType "application/json"
+$testresults = Invoke-RestMethod -Method Post -Uri $slackWebHook -ContentType "application/json" -Body $slackPayload
