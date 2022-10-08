@@ -43,4 +43,4 @@ jobs:
           slackWebhook: ${{ secrets.slack-webhook }}
         run: |
           $prList = ./staleprs.ps1 -githubBaseUrl $env:ghUrl -apiToken $env:ghAPIToken -repoName $env:ghRepoName
-          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -slackBlockKitText $slackBody -repositoryName $env:ghRepoName -prList $prList
+          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -repositoryName $env:ghRepoName -prList $prList
