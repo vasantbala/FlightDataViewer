@@ -1,10 +1,10 @@
 param (
     [Parameter(Mandatory)]
-    [String]$slackWebHook
+    [String]$slackWebHook,
     [Parameter(Mandatory)]
-    [String]$slackBlockKitText
+    [String]$slackBlockKitText,
     [Parameter(Mandatory)]
-    [String]$repositoryName
+    [String]$repositoryName,
     [Parameter(Mandatory)]
     [Object]$prList
     )
