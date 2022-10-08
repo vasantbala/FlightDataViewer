@@ -14,7 +14,21 @@ Class PRResult
     [int] $daysWithoutResponse
     [String[]] $reviewers
     [String] $action
-    }
+}
+
+function Get-Github-UserEmail {
+    param (
+        $githubBaseUrl,
+        $githubUserId,
+        $headers
+    )
+    
+    $url = $githubBaseUrl + '/users/' + $githubUserId
+    $userdata = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ContentType "application/json"
+    $userdata.login
+}
+    $userDictionary = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+
     $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"          
     $bearerToken = 'Bearer ' + $apiToken
     Write-Host $bearerToken
@@ -30,14 +44,32 @@ Class PRResult
         $prResult = New-Object PRResult
         $prResult.title = $_.title
         $prResult.daysWithoutResponse = $diff.TotalDays
-        $prResult.owner = $_.user.login            
+        
+        
+        if($userDictionary.ContainsKey($_.user.login)){
+            $prResult.owner = $userDictionary[$_.user.login]
+        }
+        else{
+            $prResult.owner = Get-Github-UserEmail -githubBaseUrl $githubBaseUrl -githubUserId $_.user.login -headers $headers
+            $userDictionary.Add($_.user.login, $prResult.owner)
+        }
+
         $reviewUrl = $url + '/' + $_.number + '/reviews'
         $reviewResults = Invoke-RestMethod -Method Get -Uri $reviewUrl -Headers $headers -ContentType "application/json"
         $reviewersList = New-Object Collections.Generic.List[String]
         $reviewResults | ForEach-Object {
-            if(!$reviewersList.Contains($_.user.login)){
-                $reviewersList.Add($_.user.login)
-            }
+
+        if($userDictionary.ContainsKey($_.user.login)){
+            $reviewerEmail = $userDictionary[$_.user.login]
+        }
+        else{
+            $reviewerEmail = Get-Github-UserEmail -githubBaseUrl $githubBaseUrl -githubUserId $_.user.login -headers $headers
+            $userDictionary.Add($_.user.login, $reviewerEmail)
+        }
+
+        if(!$reviewersList.Contains($reviewerEmail)){
+            $reviewersList.Add($reviewerEmail)
+        }
         }
         $prResult.reviewers = $reviewersList.ToArray()
         if($reviewersList.Count -lt 2){

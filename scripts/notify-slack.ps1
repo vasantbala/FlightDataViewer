@@ -63,7 +63,11 @@ $prList | ForEach-Object {
         $fieldItem.text = '*Author*: ' + $_.owner
         $fieldsList.Add($fieldItem)
 
+
         $reviewersString = $_.reviewers -join ","
+        if(($_.reviewers -eq $null) -or ($_.reviewers.Length -le 2)){
+            $reviewersString = $reviewersString + "Reviewers required"
+        }
 
         $fieldItem = New-Object SlackSectionItem
         $fieldItem.type = 'mrkdwn'
