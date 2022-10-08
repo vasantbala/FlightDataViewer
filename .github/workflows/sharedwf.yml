@@ -44,4 +44,4 @@ jobs:
         run: |
           $prList = ./staleprs.ps1 -githubBaseUrl $env:ghUrl -apiToken $env:ghAPIToken -repoName $env:ghRepoName
           $prList | Format-Table -AutoSize
-          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -repositoryName 'Acme' -prList $prList
+          ./notify-slack.ps1 -slackWebHook $env:slackWebhook -repositoryName $env:ghRepoName -prList $prList
