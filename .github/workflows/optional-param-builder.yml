@@ -7,13 +7,16 @@ on:
   #Shared 
   workflow_dispatch:
     inputs:
-      num-octocats:
-        description: 'Number of Octocats'
-        required: false
-        default: '1'
-      octocat-eye-color:
-        description: 'Eye color of the Octocats'
+      param1:
+        description: 'Param1'
         required: true
+      param2:
+        description: 'Param2'
+        required: true
+      param3:
+        description: 'Param3'
+        required: false
+      
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,7 +33,8 @@ jobs:
         working-directory: ./scripts
         shell: pwsh
         env:
-          param1: ${{ inputs.num-octocats }}
-          param2: ${{ inputs.octocat-eye-color }}
+          param1: ${{ inputs.param1 }}
+          param2: ${{ inputs.param2 }}
+          param3: ${{ inputs.param3 }}
         run: |
-          ./supply-chain.ps1 -param1 $env:param1 -param2 $env:param2
+          ./supply-chain.ps1 -param1 $env:param1 -param2 $env:param2 -param3 $env:param3
