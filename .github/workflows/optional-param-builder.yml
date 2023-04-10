@@ -7,18 +7,13 @@ on:
   #Shared 
   workflow_call:
     inputs:
-      param1:
-        required: true
-        type: string
-        description: "param1"
-      param2:
-        required: true
-        type: string
-        description: "param2"
-      param3:
+      num-octocats:
+        description: 'Number of Octocats'
         required: false
-        type: string
-        description: "param3"
+        default: '1'
+      octocat-eye-color:
+        description: 'Eye color of the Octocats'
+        required: true
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,8 +33,7 @@ jobs:
         working-directory: ./scripts
         shell: pwsh
         env:
-          param1: ${{ inputs.param1 }}
-          param2: ${{ inputs.param2 }}
-          param3: ${{ inputs.param3 }}
+          param1: ${{ inputs.num-octocats }}
+          param2: ${{ inputs.octocat-eye-color }}
         run: |
-          ./supply-chain.ps1 -param1 $env:param1 -param2 $env:param2 -param3 $env:param3
+          ./supply-chain.ps1 -param1 $env:param1 -param2 $env:param2
