@@ -33,7 +33,7 @@ jobs:
         working-directory: ./scripts
         shell: pwsh
         run: |
-          if("${{ inputs.param3 }}".Trim().Length > 0){
+          if("${{ inputs.param3 }}".Trim().Length -gt 0){
             Write-Host 'with param3'
             ./supply-chain.ps1 -param1 "${{ inputs.param1 }}" -param2 "${{ inputs.param2 }}" -param3 "${{ inputs.param3 }}"
           }
