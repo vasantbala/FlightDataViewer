@@ -37,7 +37,7 @@ jobs:
           param2: ${{ inputs.param2 }}
           param3: ${{ inputs.param3 }}
         run: |
-          if(${{ inputs.param3 }}.Trim().Length > 0){
+          if("${{ inputs.param3 }}".Trim().Length > 0){
             ./supply-chain.ps1 -param1 $env:param1 -param2 $env:param2 -param3 $env:param3
           }
           else{
