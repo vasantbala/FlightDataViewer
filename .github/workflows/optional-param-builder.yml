@@ -27,6 +27,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Validate inputs
+        shell: pwsh
+        run: |
+          if(("${{ github.event.inputs.param3 }}".Trim().Length -gt > 0) -and ("${{ github.event.inputs.param3 }}".Trim().StartsWith("brew", "CurrentCultureIgnoreCase") -eq $False )){
+            exit 1
+          }
+
       # Runs a set of commands using the runners shell
       - uses: actions/checkout@v3
       - name: Run a multi-line script
