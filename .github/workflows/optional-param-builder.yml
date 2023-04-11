@@ -30,7 +30,7 @@ jobs:
       - name: Validate inputs
         shell: pwsh
         run: |
-          if(("${{ github.event.inputs.param3 }}".Trim().Length -gt > 0) -and ("${{ github.event.inputs.param3 }}".Trim().StartsWith("brew", "CurrentCultureIgnoreCase") -eq $False )){
+          if(("${{ github.event.inputs.param3 }}".Trim().Length -gt 0) -and ("${{ github.event.inputs.param3 }}".Trim().StartsWith("brew", "CurrentCultureIgnoreCase") -eq $False )){
             Write-Output 'param3 should start with brew'
             exit 1
           }
