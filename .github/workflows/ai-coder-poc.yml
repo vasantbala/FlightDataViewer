@@ -26,7 +26,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add README.md
+          echo "Automatically added" >> README.md
           git commit -m "Append line to README.md"
 
       - name: Push changes
