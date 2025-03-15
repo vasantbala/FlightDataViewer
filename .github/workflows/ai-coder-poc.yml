@@ -22,12 +22,10 @@ jobs:
           git checkout -b ${{ github.event.inputs.branch-name }}
 
       - name: Append line to README.md
-        run: echo "This is a new line added by GitHub Actions." >> README.md
+        run: echo "This is a new line added by GitHub Actions." >> readme.md
 
       - name: Commit changes
-        run: |
-          git add README.md
-          git commit -m "Append line to README.md"
+        run: git commit -m "Append line to README.md"
 
       - name: Push changes
         run: git push origin ${{ github.event.inputs.branch-name }}
