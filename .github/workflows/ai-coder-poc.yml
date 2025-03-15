@@ -26,7 +26,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add README.md
+          echo "Automatically added" >> README.md
           git commit -m "Append line to README.md"
 
       - name: Push changes
@@ -36,6 +36,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: "master"
           branch: ${{ github.event.inputs.branch-name }}
           title: "Append line to README.md"
           body: "This PR appends a line to README.md"
