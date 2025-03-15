@@ -31,3 +31,12 @@ jobs:
 
       - name: Push changes
         run: git push origin ${{ github.event.inputs.branch-name }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.inputs.branch-name }}
+          title: "Append line to README.md"
+          body: "This PR appends a line to README.md"
+          commit-message: update authors
